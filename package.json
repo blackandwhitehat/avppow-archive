@@ -1,0 +1,10 @@
+{
+  "name": "avppow-archive",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "check": "node src/check-links.mjs"
+  }
+}
