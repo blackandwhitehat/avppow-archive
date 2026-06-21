@@ -21,10 +21,17 @@ const DYNDNS = 'http://avppow.dyndns.org';
 
 function rewriteUrls(html) {
   return html
+    // print view collapses to the regular review page (we don't ship a
+    // print stylesheet variant; the body content is identical anyway)
+    .replace(/http:\/\/avppow\.dyndns\.org\/\?view=print&(?:amp;)?review=([A-Za-z0-9_-]+)\.txt/g, (_, n) => `/reviews/${n}/`)
     .replace(/http:\/\/avppow\.dyndns\.org\/\?view=reviews&(?:amp;)?review=([A-Za-z0-9_-]+)\.txt/g, (_, n) => `/reviews/${n}/`)
     .replace(/http:\/\/avppow\.dyndns\.org\/\?view=reviews&(?:amp;)?letter=([A-Za-z])/g, (_, l) => `/reviews/letter/${l}/`)
     .replace(/http:\/\/avppow\.dyndns\.org\/\?view=([a-z]+)/g, (_, v) => `/${v}/`)
-    .replace(/http:\/\/avppow\.dyndns\.org\/?(?=["'])/g, '/');
+    // bare path references (e.g. <img src="http://avppow.dyndns.org/Reviews/Images/Omikron/ok1.gif">)
+    // get the dyndns prefix stripped + the Reviews dir lowercased to match dist layout
+    .replace(/http:\/\/avppow\.dyndns\.org\/Reviews\//g, '/reviews/')
+    .replace(/http:\/\/avppow\.dyndns\.org\/News\//g, '/news/')
+    .replace(/http:\/\/avppow\.dyndns\.org\//g, '/');
 }
 
 const NAV = rewriteUrls(`
