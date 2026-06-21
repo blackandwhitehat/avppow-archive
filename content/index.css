@@ -1,0 +1,59 @@
+A:active{
+    COLOR: #000000;
+    TEXT-DECORATION: none;
+}
+
+A:hover{
+    COLOR: #0090FF;
+    TEXT-DECORATION: none;
+}
+
+A:link{
+    COLOR: #000000;
+    TEXT-DECORATION: none;
+}
+
+A:visited{
+    COLOR: #000000;
+    TEXT-DECORATION: none;
+}
+
+A:visited:hover{
+    COLOR: #0090FF;
+    TEXT-DECORATION: none;
+}
+
+A.admin:active{
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none;
+}
+
+A.admin:link{
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none;
+}
+
+A.admin:visited{
+    COLOR: #FFFFFF;
+    TEXT-DECORATION: none;
+}
+
+.admin{
+    COLOR: #000000;
+}
+
+.nav{
+    COLOR: #000000;
+    FONT-SIZE: 10pt;
+    FONT-WEIGHT: bold;
+    FONT-FAMILY: Arial, Helvetica, sans-serif;
+}
+
+TABLE.maintable{
+    BORDER-LEFT: #000000 1px solid; 
+    BORDER-RIGHT: #000000 1px solid; 
+    BORDER-TOP: #000000 0px solid; 
+    BORDER-BOTTOM: #000000 0px solid; 
+    BORDER-TOP-WIDTH: 0; 
+    BORDER-BOTTOM-WIDTH: 0;
+}

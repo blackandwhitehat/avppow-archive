@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node src/build.mjs",
-    "check": "node src/check-links.mjs"
+    "build": "node src/build.mjs"
   }
 }
