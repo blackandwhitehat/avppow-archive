@@ -59,6 +59,22 @@ function stripAdminLink(layout) {
   return layout.replace(/<A HREF="[^"]*coranto\.pl" CLASS="admin">admin<\/A>/g, '');
 }
 
+// Make every relative asset reference in layout.htm absolute. The original
+// markup uses bare filenames (HREF="index.css", SRC="titlebar.gif", etc.)
+// which resolved against the page URL in 2002 - fine when every page was
+// served at the same /index.pl path. Once we split into /about/, /journal/,
+// /reviews/, etc., bare filenames resolve to /about/index.css which 404s.
+// Rewrite to root-absolute. Same bytes served, just under a path that works.
+function absolutizeAssets(layout) {
+  const assets = ['index.css', 'titlebar.gif', 'titlebarbg.gif', 'bg.gif', 'copyright.gif', 'fun.gif', 'gade.JPG'];
+  let out = layout;
+  for (const a of assets) {
+    const re = new RegExp(`((?:HREF|SRC|BACKGROUND)=")(?!\\/|http)${a.replace('.', '\\.')}(")`, 'g');
+    out = out.replace(re, `$1/${a}$2`);
+  }
+  return out;
+}
+
 async function emit(outRel, html) {
   const target = path.join(distDir, outRel, 'index.html');
   await mkdir(path.dirname(target), { recursive: true });
@@ -93,7 +109,7 @@ async function copyAssets() {
 async function build() {
   await mkdir(distDir, { recursive: true });
   const layoutRaw = stripAdminLink(await readFile(path.join(contentDir, 'layout.htm'), 'utf8'));
-  const layout = rewriteUrls(layoutRaw);
+  const layout = absolutizeAssets(rewriteUrls(layoutRaw));
 
   await copyAssets();
 
